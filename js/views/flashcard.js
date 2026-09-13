@@ -1,4 +1,4 @@
-import { state, setView } from '../state.js';
+import { state, setView, hasActiveFilters, resetFilters } from '../state.js';
 import { formatCode, renderBadges } from '../utils.js';
 
 let flashcardKeyHandler = null;
@@ -12,29 +12,43 @@ export function renderFlashcard() {
     flashcardKeyHandler = null;
   }
   
-  const baseList = state.filteredQuestions.length > 0 ? state.filteredQuestions : state.questions;
+  const isFiltered = hasActiveFilters();
+  const baseList = isFiltered ? state.filteredQuestions : state.questions;
+
+  if (baseList.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 3rem;" class="quiz-card">
+        <h3>🔍 No flashcards match your search or filter criteria.</h3>
+        <p style="color: var(--color-text-muted); margin-top: 0.5rem;">
+          Try adjusting your search query or reset your filters.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+          <button class="btn btn-secondary" id="fc-reset-filters">Reset Filters</button>
+          <button class="btn btn-primary" id="back-dash">Back to Dashboard</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('fc-reset-filters').addEventListener('click', () => {
+      resetFilters();
+      renderFlashcard();
+    });
+    document.getElementById('back-dash').addEventListener('click', () => setView('dashboard'));
+    return;
+  }
+
   let list = [...baseList].sort(() => 0.5 - Math.random());
   let currentCardIndex = 0;
   
   function renderCard() {
     const q = list[currentCardIndex];
-    if (!q) {
-      container.innerHTML = `
-        <div style="text-align: center; padding: 2rem;">
-          <h3>No questions available for flashcard study with the active filters.</h3>
-          <button class="btn btn-primary" id="back-dash" style="margin-top: 1rem;">Back to Dashboard</button>
-        </div>
-      `;
-      document.getElementById('back-dash').addEventListener('click', () => setView('dashboard'));
-      return;
-    }
+    if (!q) return;
     
     const optionLetters = ['A', 'B', 'C', 'D', 'E', 'F'];
     
     container.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
         <button class="btn btn-secondary" id="fc-back">← Back to Dashboard</button>
-        <span class="quiz-meta">Card ${currentCardIndex + 1} of ${list.length}</span>
+        <span class="quiz-meta">Card ${currentCardIndex + 1} of ${list.length} (ID: #${q.id})</span>
       </div>
 
       <div class="flashcard-wrapper">

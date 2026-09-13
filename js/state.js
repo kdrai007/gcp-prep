@@ -44,29 +44,56 @@ export function resetExam() {
   };
 }
 
+export function hasActiveFilters() {
+  return Boolean(
+    (state.searchQuery && state.searchQuery.trim() !== '') ||
+    (state.categoryFilter && state.categoryFilter !== 'all') ||
+    (state.difficultyFilter && state.difficultyFilter !== 'all')
+  );
+}
+
+export function resetFilters() {
+  state.searchQuery = '';
+  state.categoryFilter = 'all';
+  state.difficultyFilter = 'all';
+  applyFilters();
+}
+
 /**
  * Filter questions based on state.searchQuery, state.categoryFilter, and state.difficultyFilter
  */
 export function applyFilters() {
   let filtered = [...state.questions];
 
+  // 1. Filter by category
   if (state.categoryFilter && state.categoryFilter !== 'all') {
     filtered = filtered.filter(q => q.category === state.categoryFilter);
   }
 
+  // 2. Filter by difficulty
   if (state.difficultyFilter && state.difficultyFilter !== 'all') {
     filtered = filtered.filter(q => (q.difficulty || 'Medium') === state.difficultyFilter);
   }
 
+  // 3. Search query (smart multi-term matching)
   if (state.searchQuery && state.searchQuery.trim() !== '') {
-    const term = state.searchQuery.toLowerCase().trim();
+    const rawQuery = state.searchQuery.toLowerCase().trim();
+    const terms = rawQuery.split(/\s+/).filter(Boolean);
+
     filtered = filtered.filter(q => {
-      const qText = (q.question + ' ' + (q.explanation || '') + ' ' + (q.options || []).join(' ')).toLowerCase();
-      return qText.includes(term);
+      const idVariants = `q${q.id} #${q.id} question${q.id} ${q.id}`;
+      const categoryStr = (q.category || '').toLowerCase();
+      const diffStr = (q.difficulty || '').toLowerCase();
+      const questionStr = (q.question || '').toLowerCase();
+      const explanationStr = (q.explanation || '').toLowerCase();
+      const optionsStr = (q.options || []).join(' ').toLowerCase();
+
+      const haystack = `${idVariants} ${categoryStr} ${diffStr} ${questionStr} ${explanationStr} ${optionsStr}`;
+
+      return terms.every(term => haystack.includes(term));
     });
   }
 
   state.filteredQuestions = filtered;
-  state.currentQuestionIndex = 0;
   return filtered;
 }

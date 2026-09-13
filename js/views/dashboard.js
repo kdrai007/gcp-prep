@@ -1,5 +1,6 @@
-import { state, setView, applyFilters, resetExam } from '../state.js';
+import { state, setView, applyFilters, resetFilters, hasActiveFilters, resetExam } from '../state.js';
 import { storage } from '../storage.js';
+import { renderBadges, highlightText } from '../utils.js';
 
 export function renderDashboard() {
   const container = document.getElementById('app-view');
@@ -42,7 +43,9 @@ export function renderDashboard() {
   // Dynamically extract categories
   const categories = [...new Set(state.questions.flatMap(q => q.category || ['General']))].sort();
 
-  const filteredCount = state.filteredQuestions.length;
+  const isFiltered = hasActiveFilters();
+  const filteredList = state.filteredQuestions;
+  const filteredCount = filteredList.length;
 
   container.innerHTML = `
     <!-- Search & Filter Panel -->
@@ -52,9 +55,11 @@ export function renderDashboard() {
           type="text" 
           id="search-bar" 
           class="input-text" 
-          placeholder="Search questions (e.g. IAM, GKE, Cloud Run, NAT)..." 
+          placeholder="Search questions (e.g. IAM, Storage, GKE, NAT, #45)..." 
           value="${state.searchQuery}"
+          autocomplete="off"
         >
+        <button id="search-clear-btn" class="search-clear-btn" title="Clear search" style="${state.searchQuery ? 'display: block;' : 'display: none;'}">✕</button>
       </div>
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
         <select id="category-filter" class="select-input" style="min-width: 150px;">
@@ -70,9 +75,28 @@ export function renderDashboard() {
       </div>
     </div>
 
-    <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: -1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between;">
-      <span>Filtering: <strong>${filteredCount}</strong> of <strong>${total}</strong> questions matching criteria</span>
-      ${(state.searchQuery || state.categoryFilter !== 'all' || state.difficultyFilter !== 'all') ? '<a href="#" id="clear-filters" style="color: var(--color-gcp-blue);">Reset Filters</a>' : ''}
+    <!-- Live Filter Status Summary -->
+    <div id="filter-status-row" style="font-size: 0.88rem; color: var(--color-text-muted); margin-top: -1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+      <span id="filter-count-text">${getFilterCountText(filteredCount, total, isFiltered)}</span>
+      <button id="clear-filters-btn" class="btn-icon" style="font-size: 0.82rem; color: var(--color-gcp-blue); padding: 0.2rem 0.5rem; border-radius: 4px; ${isFiltered ? 'display: inline-block;' : 'display: none;'}">
+        ✕ Reset Filters
+      </button>
+    </div>
+
+    <!-- Question Bank / Search Results Drawer (Shown when filtering or searchable) -->
+    <div id="question-bank-section" class="quiz-card" style="margin-bottom: 2rem; padding: 1.25rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <h3 style="font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>🔍 Question Bank & Filtered Results</span>
+          <span id="qb-badge-count" class="badge badge-category" style="font-size: 0.72rem;">${filteredCount} Questions</span>
+        </h3>
+        <button id="btn-practice-filtered" class="btn btn-primary btn-sm">
+          Practice These ${filteredCount} Questions →
+        </button>
+      </div>
+      <div id="question-bank-container" class="question-bank-list">
+        ${renderQuestionBankItems(filteredList, state.searchQuery)}
+      </div>
     </div>
 
     <div class="dashboard-grid">
@@ -133,8 +157,12 @@ export function renderDashboard() {
       <!-- Mode Cards -->
       <section class="mode-cards">
         <div class="mode-card" id="mode-practice">
-          <h3>📖 Practice Mode</h3>
-          <p>Work through active filtered questions at your own pace with instant answer checks and explanations.</p>
+          <h3 id="mode-practice-title">📖 Practice Mode ${isFiltered ? `(${filteredCount} filtered)` : ''}</h3>
+          <p id="mode-practice-desc">
+            ${isFiltered 
+              ? `Work through your ${filteredCount} active filtered questions with instant answer checks and explanations.` 
+              : `Go through all ${total} questions at your own pace with instant answer checks and explanations.`}
+          </p>
         </div>
 
         <div class="mode-card" id="mode-weaknesses" style="border-left: 4px solid var(--color-gcp-red);">
@@ -158,7 +186,7 @@ export function renderDashboard() {
         </div>
 
         <div class="mode-card" id="mode-flashcard">
-          <h3>🗂️ Flashcard Mode</h3>
+          <h3>🗂️ Flashcard Mode ${isFiltered ? `(${filteredCount} filtered)` : ''}</h3>
           <p>Interactive 3D flipcards designed for quick concept revision, mental recall, and keyboard-driven study.</p>
         </div>
 
@@ -185,7 +213,7 @@ export function renderDashboard() {
       </div>
     </section>
 
-    <!-- Custom Quiz Modal Backdrop (Hidden by default) -->
+    <!-- Custom Quiz Modal Backdrop -->
     <div id="custom-quiz-modal" class="modal-backdrop" style="display: none;">
       <div class="modal-card">
         <div class="modal-header">
@@ -233,49 +261,177 @@ export function renderDashboard() {
     </div>
   `;
 
-  // Search & Filter event listeners
+  // Helper functions
+  function getFilterCountText(count, totalCount, active) {
+    if (!active) {
+      return `Showing all <strong>${totalCount}</strong> questions`;
+    }
+    return `Found <strong>${count}</strong> of <strong>${totalCount}</strong> questions matching filters`;
+  }
+
+  function renderQuestionBankItems(questions, query) {
+    if (!questions || questions.length === 0) {
+      return `
+        <div style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+          <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">🔍 No questions match your filter criteria.</p>
+          <p style="font-size: 0.85rem;">Try adjusting your search terms or clearing the topic/difficulty filters.</p>
+        </div>
+      `;
+    }
+
+    return questions.map((q, idx) => {
+      const prog = state.practiceProgress[q.id];
+      let statusIcon = '⚪';
+      let statusTitle = 'Unattempted';
+      if (prog && prog.attempted) {
+        if (prog.correct) {
+          statusIcon = '✅';
+          statusTitle = 'Solved Correct';
+        } else {
+          statusIcon = '❌';
+          statusTitle = 'Missed';
+        }
+      }
+      const isBookmarked = state.bookmarks.includes(q.id);
+
+      return `
+        <div class="question-bank-item" data-id="${q.id}" data-idx="${idx}">
+          <div class="question-bank-info">
+            <span class="question-bank-num">#${q.id}</span>
+            <span title="${statusTitle}">${statusIcon}</span>
+            ${isBookmarked ? '<span title="Bookmarked">⭐</span>' : ''}
+            <span class="question-bank-text">${highlightText(q.question, query)}</span>
+          </div>
+          <div class="question-bank-meta">
+            ${renderBadges(q.category, q.difficulty)}
+            <span style="color: var(--color-gcp-blue); font-size: 0.85rem; font-weight: 500;">Practice →</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Live filter updater (does NOT destroy search input or lose focus!)
+  function updateLiveFilterResults() {
+    const list = applyFilters();
+    const count = list.length;
+    const active = hasActiveFilters();
+
+    // 1. Update count text
+    const countElem = document.getElementById('filter-count-text');
+    if (countElem) countElem.innerHTML = getFilterCountText(count, total, active);
+
+    // 2. Update reset button visibility
+    const resetBtn = document.getElementById('clear-filters-btn');
+    if (resetBtn) resetBtn.style.display = active ? 'inline-block' : 'none';
+
+    // 3. Update search clear button visibility
+    const clearBtn = document.getElementById('search-clear-btn');
+    if (clearBtn) clearBtn.style.display = state.searchQuery ? 'block' : 'none';
+
+    // 4. Update question bank container
+    const qbContainer = document.getElementById('question-bank-container');
+    if (qbContainer) {
+      qbContainer.innerHTML = renderQuestionBankItems(list, state.searchQuery);
+      attachQuestionBankItemClicks();
+    }
+
+    // 5. Update badge count
+    const qbBadge = document.getElementById('qb-badge-count');
+    if (qbBadge) qbBadge.textContent = `${count} Questions`;
+
+    // 6. Update practice button text
+    const btnPracticeFiltered = document.getElementById('btn-practice-filtered');
+    if (btnPracticeFiltered) {
+      btnPracticeFiltered.textContent = `Practice These ${count} Questions →`;
+      btnPracticeFiltered.disabled = count === 0;
+    }
+
+    // 7. Update mode cards description
+    const modePracticeTitle = document.getElementById('mode-practice-title');
+    if (modePracticeTitle) {
+      modePracticeTitle.textContent = `📖 Practice Mode ${active ? `(${count} filtered)` : ''}`;
+    }
+    const modePracticeDesc = document.getElementById('mode-practice-desc');
+    if (modePracticeDesc) {
+      modePracticeDesc.textContent = active 
+        ? `Work through your ${count} active filtered questions with instant answer checks and explanations.` 
+        : `Go through all ${total} questions at your own pace with instant answer checks and explanations.`;
+    }
+  }
+
+  function attachQuestionBankItemClicks() {
+    const items = document.querySelectorAll('.question-bank-item');
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const qId = item.getAttribute('data-id');
+        const qIndex = state.filteredQuestions.findIndex(q => q.id === qId);
+        state.currentQuestionIndex = qIndex >= 0 ? qIndex : 0;
+        setView('practice');
+      });
+    });
+  }
+
+  // Bind Search input live events
   const searchInput = document.getElementById('search-bar');
   searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value;
-    applyFilters();
-    // Update count display
-    const label = document.querySelector('span:has(strong)');
-  });
-  
-  // Re-render when Enter is pressed or on change
-  searchInput.addEventListener('change', () => {
-    renderDashboard();
+    updateLiveFilterResults();
   });
 
+  const searchClearBtn = document.getElementById('search-clear-btn');
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener('click', () => {
+      state.searchQuery = '';
+      searchInput.value = '';
+      searchInput.focus();
+      updateLiveFilterResults();
+    });
+  }
+
+  // Bind Category and Difficulty filter changes
   document.getElementById('category-filter').addEventListener('change', (e) => {
     state.categoryFilter = e.target.value;
-    renderDashboard();
+    updateLiveFilterResults();
   });
 
   document.getElementById('difficulty-filter').addEventListener('change', (e) => {
     state.difficultyFilter = e.target.value;
-    renderDashboard();
+    updateLiveFilterResults();
   });
 
-  const clearBtn = document.getElementById('clear-filters');
-  if (clearBtn) {
-    clearBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      state.searchQuery = '';
-      state.categoryFilter = 'all';
-      state.difficultyFilter = 'all';
-      renderDashboard();
+  // Reset filters button
+  const resetBtn = document.getElementById('clear-filters-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      resetFilters();
+      searchInput.value = '';
+      document.getElementById('category-filter').value = 'all';
+      document.getElementById('difficulty-filter').value = 'all';
+      updateLiveFilterResults();
     });
   }
 
-  // Navigation to Modes
+  // Practice Filtered button
+  const btnPracticeFiltered = document.getElementById('btn-practice-filtered');
+  if (btnPracticeFiltered) {
+    btnPracticeFiltered.addEventListener('click', () => {
+      if (state.filteredQuestions.length === 0) return;
+      state.currentQuestionIndex = 0;
+      setView('practice');
+    });
+  }
+
+  // Initial attachment for question bank items
+  attachQuestionBankItemClicks();
+
+  // Mode Card Click Handlers
   document.getElementById('mode-practice').addEventListener('click', () => {
     applyFilters();
     state.currentQuestionIndex = 0;
     setView('practice');
   });
 
-  // Target Weaknesses mode
   document.getElementById('mode-weaknesses').addEventListener('click', () => {
     if (missedQuestions.length === 0) {
       alert('Great job! You have no missed questions yet. Try some practice questions first!');
@@ -286,7 +442,6 @@ export function renderDashboard() {
     setView('practice');
   });
 
-  // Full Exam Simulation
   document.getElementById('mode-exam').addEventListener('click', () => {
     resetExam();
     state.examSession.questions = [...state.questions].sort(() => 0.5 - Math.random()).slice(0, 50);
@@ -296,7 +451,7 @@ export function renderDashboard() {
     setView('exam');
   });
 
-  // Custom Quiz Modal logic
+  // Custom Quiz Modal
   const modal = document.getElementById('custom-quiz-modal');
   document.getElementById('mode-custom-quiz').addEventListener('click', () => {
     modal.style.display = 'flex';
@@ -328,7 +483,6 @@ export function renderDashboard() {
       return;
     }
 
-    // Shuffle
     pool.sort(() => 0.5 - Math.random());
     const count = countVal === 'all' ? pool.length : Math.min(parseInt(countVal), pool.length);
     const selectedQuestions = pool.slice(0, count);
@@ -385,7 +539,6 @@ export function renderDashboard() {
     reader.onload = (event) => {
       const res = storage.importAll(event.target.result);
       if (res.success) {
-        // Reload state
         state.bookmarks = storage.loadBookmarks();
         state.practiceProgress = storage.loadPractice();
         state.history = storage.loadHistory();

@@ -10,7 +10,8 @@
     ],
     "correct": 1,
     "explanation": "Compute Engine with managed instance groups provides auto-scaling capabilities, and Cloud Load Balancing distributes traffic effectively. This is a classic scalable architecture pattern.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "2",
@@ -23,7 +24,8 @@
     ],
     "correct": 2,
     "explanation": "Standard storage for frequent access (first 30 days), then lifecycle policy automatically moves data to Nearline for infrequent access, optimizing costs.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "3",
@@ -36,7 +38,8 @@
     ],
     "correct": 2,
     "explanation": "Cloud Run is ideal for containerized applications with specific resource requirements and provides serverless scaling with minimal management.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "id": "4",
@@ -49,7 +52,8 @@
     ],
     "correct": 0,
     "explanation": "Cloud SQL for MySQL with HA configuration provides automatic failover, managed backups, and is perfect for traditional MySQL workloads.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Databases & Analytics"
   },
   {
     "id": "5",
@@ -62,7 +66,8 @@
     ],
     "correct": 1,
     "explanation": "Workload Identity is the recommended secure method to access Google Cloud services from GKE without storing service account keys.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "GKE / Containers"
   },
   {
     "id": "6",
@@ -75,7 +80,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud Build is Google Cloud's CI/CD service that can automatically trigger builds from Git repositories and deploy applications.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "7",
@@ -88,7 +94,8 @@
     ],
     "correct": 1,
     "explanation": "Private Google Access allows VMs without external IPs to reach Google services and receive updates while preventing direct internet access.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "8",
@@ -101,7 +108,8 @@
     ],
     "correct": 2,
     "explanation": "Dataproc with preemptible instances is cost-effective for batch jobs that can tolerate interruptions, perfect for weekly processing jobs.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "id": "9",
@@ -114,7 +122,8 @@
     ],
     "correct": 2,
     "explanation": "Memorystore for Redis provides in-memory caching with TTL support, perfect for session data with expiration requirements.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "10",
@@ -127,7 +136,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud Monitoring provides alerting capabilities based on metrics like CPU utilization with configurable thresholds and time windows.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "id": "11",
@@ -140,7 +150,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud Pub/Sub provides guaranteed message delivery, message retention for replay, and supports asynchronous processing patterns.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "12",
@@ -153,7 +164,8 @@
     ],
     "correct": 1,
     "explanation": "Authorized networks allow you to specify which IP ranges can access the cluster's public endpoint, providing secure access control.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "GKE / Containers"
   },
   {
     "id": "13",
@@ -166,7 +178,8 @@
     ],
     "correct": 2,
     "explanation": "Deployment Manager (Google's native tool) or Terraform provide infrastructure as code capabilities with declarative configuration files.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "14",
@@ -179,7 +192,8 @@
     ],
     "correct": 0,
     "explanation": "Network tags with firewall rules allow you to control traffic between different tiers by applying rules based on source and target tags.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Databases & Analytics"
   },
   {
     "id": "15",
@@ -192,7 +206,8 @@
     ],
     "correct": 0,
     "explanation": "Standard storage for initial period, then lifecycle policy moves to Archive storage for long-term retention at minimal cost.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "16",
@@ -205,7 +220,8 @@
     ],
     "correct": 2,
     "explanation": "Database Migration Service provides minimal downtime migration for large databases with continuous data replication.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Databases & Analytics"
   },
   {
     "id": "17",
@@ -218,7 +234,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud SQL Proxy provides secure connections from App Engine to Cloud SQL instances without exposing the database publicly.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Databases & Analytics"
   },
   {
     "id": "18",
@@ -231,7 +248,8 @@
     ],
     "correct": 1,
     "explanation": "Node auto-upgrade automatically updates GKE nodes with the latest patches and Kubernetes versions during maintenance windows.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "id": "19",
@@ -244,7 +262,8 @@
     ],
     "correct": 1,
     "explanation": "Active-passive multi-regional deployment can meet RTO of 4 hours with regular data replication to meet RPO of 1 hour.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "20",
@@ -257,7 +276,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud Pub/Sub ingests streaming data, Dataflow processes it in real-time, and results are stored in BigQuery for analysis.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Databases & Analytics"
   },
   {
     "id": "21",
@@ -270,7 +290,8 @@
     ],
     "correct": 1,
     "explanation": "Google Cloud encrypts all data at rest and in transit by default using Google-managed encryption keys.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "22",
@@ -283,7 +304,8 @@
     ],
     "correct": 0,
     "explanation": "Signed URLs provide time-limited access to Cloud Storage objects without requiring authentication credentials.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "23",
@@ -296,7 +318,8 @@
     ],
     "correct": 1,
     "explanation": "Preemptible instances offer significant cost savings (up to 80%) for fault-tolerant, batch processing workloads.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "24",
@@ -309,7 +332,8 @@
     ],
     "correct": 1,
     "explanation": "HTTP health checks can monitor specific endpoints like /health and verify the response code for application health.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "25",
@@ -322,7 +346,8 @@
     ],
     "correct": 0,
     "explanation": "Separate projects provide complete isolation between environments, preventing accidental changes and enabling different access controls.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "26",
@@ -335,7 +360,8 @@
     ],
     "correct": 2,
     "explanation": "Cloud SQL does not support automatic scaling of compute resources. You can add read replicas for read scaling but not automatic vertical scaling.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Databases & Analytics"
   },
   {
     "id": "27",
@@ -348,7 +374,8 @@
     ],
     "correct": 1,
     "explanation": "BigQuery is ideal for analytical workloads on large datasets, and table expiration can automatically manage data retention.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "28",
@@ -361,7 +388,8 @@
     ],
     "correct": 0,
     "explanation": "Binary Authorization ensures that only verified container images can be deployed to GKE clusters.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "id": "29",
@@ -374,7 +402,8 @@
     ],
     "correct": 1,
     "explanation": "Firestore in Native mode provides global replication, low latency access, and is perfect for configuration data.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Databases & Analytics"
   },
   {
     "id": "30",
@@ -387,7 +416,8 @@
     ],
     "correct": 2,
     "explanation": "Canary deployment allows you to route a small percentage of traffic to the new version for testing before full rollout.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "31",
@@ -400,7 +430,8 @@
     ],
     "correct": 0,
     "explanation": "Organization Policy constraints can restrict resource creation to specific regions across the entire organization.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "id": "32",
@@ -413,7 +444,8 @@
     ],
     "correct": 0,
     "explanation": "BigQuery Data Transfer Service provides automated, scheduled data transfers from various sources to BigQuery.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Databases & Analytics"
   },
   {
     "id": "33",
@@ -426,7 +458,8 @@
     ],
     "correct": 2,
     "explanation": "Google Secret Manager provides centralized, secure secret management with auditing and access controls.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "id": "34",
@@ -439,7 +472,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud VPN Gateway with multiple tunnels provides high availability through redundant connections.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "35",
@@ -452,7 +486,8 @@
     ],
     "correct": 2,
     "explanation": "HTTP request rate directly correlates with application load and is the most appropriate metric for web application scaling.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "id": "36",
@@ -465,7 +500,8 @@
     ],
     "correct": 2,
     "explanation": "Log sinks can export logs to a separate project where developers can have appropriate access without accessing production resources.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "37",
@@ -478,7 +514,8 @@
     ],
     "correct": 2,
     "explanation": "Cloud Tasks with worker instances allows for reliable, asynchronous processing of long-running, CPU-intensive tasks.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "id": "38",
@@ -491,7 +528,8 @@
     ],
     "correct": 1,
     "explanation": "Subnets with firewall rules and network tags provide granular control over inter-tier communication within a single VPC.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "39",
@@ -504,7 +542,8 @@
     ],
     "correct": 2,
     "explanation": "Cloud SQL supports full ACID transactions across multiple rows and tables, making it suitable for relational data requirements.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Databases & Analytics"
   },
   {
     "id": "40",
@@ -517,7 +556,8 @@
     ],
     "correct": 0,
     "explanation": "Cloud Functions can be secured using IAM roles and policies to control who can invoke the function.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Identity & IAM"
   },
   {
     "id": "41",
@@ -530,7 +570,8 @@
     ],
     "correct": 2,
     "explanation": "Cloud Audit Logs automatically records API calls and administrative activities across Google Cloud services.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "42",
@@ -543,7 +584,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud Dataflow is designed for stream and batch data processing with support for multiple output destinations.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "43",
@@ -556,7 +598,8 @@
     ],
     "correct": 2,
     "explanation": "Custom service accounts with minimal required permissions follow the principle of least privilege for secure access.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Identity & IAM"
   },
   {
     "id": "44",
@@ -569,7 +612,8 @@
     ],
     "correct": 1,
     "explanation": "Continuous replication to a standby region enables rapid recovery within the required 2-hour timeframe.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "45",
@@ -582,7 +626,8 @@
     ],
     "correct": 0,
     "explanation": "AI Platform Prediction (now part of Vertex AI) is specifically designed for serving ML models with automatic scaling.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "46",
@@ -595,7 +640,8 @@
     ],
     "correct": 1,
     "explanation": "Istio service mesh provides automatic mutual TLS (mTLS) for encrypting traffic between services in GKE.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "id": "47",
@@ -608,7 +654,8 @@
     ],
     "correct": 1,
     "explanation": "Cloud Storage with multi-regional buckets provides global access, high availability, and is optimized for large binary files.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "48",
@@ -621,7 +668,8 @@
     ],
     "correct": 1,
     "explanation": "Budget alerts combined with Cloud Functions can provide proactive cost control through automated responses to spending thresholds.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Management & Operations"
   },
   {
     "id": "49",
@@ -634,7 +682,8 @@
     ],
     "correct": 0,
     "explanation": "BigQuery is designed for complex analytical queries on large datasets with fast query performance.",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "Databases & Analytics"
   },
   {
     "id": "50",
@@ -647,7 +696,8 @@
     ],
     "correct": 1,
     "explanation": "The Strangler Fig pattern allows gradual migration by routing requests between old and new services, with Cloud Endpoints managing the API gateway.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "General Cloud Concepts"
   },
   {
     "id": "51",
@@ -660,7 +710,8 @@
     ],
     "correct": 2,
     "explanation": "Folders provide hierarchical organization with inherited IAM policies, enabling department-level access control while maintaining centralized governance.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "id": "52",
@@ -673,7 +724,8 @@
     ],
     "correct": 3,
     "explanation": "Cloud Audit Logs tracks all admin actions, IAM Recommender identifies unused accounts, and Cloud Scheduler can automate the 90-day cleanup process.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "id": "53",
@@ -686,7 +738,8 @@
     ],
     "correct": 0,
     "explanation": "Cloud Identity with GCDS provides AD integration, automated provisioning, and department-based access assignment through group membership.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "id": "54",
@@ -699,7 +752,8 @@
     ],
     "correct": 1,
     "explanation": "Proactive quota increase requests based on projected usage prevents service failures, with monitoring to track actual consumption.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Management & Operations"
   },
   {
     "id": "55",
@@ -712,7 +766,8 @@
     ],
     "correct": 2,
     "explanation": "Single billing account enables consolidated billing, while folders per region with country projects ensure data residency compliance and granular cost tracking.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Management & Operations"
   },
   {
     "id": "56",
@@ -725,7 +780,8 @@
     ],
     "correct": 0,
     "explanation": "Cloud Audit Logs provides detailed access trails, Security Command Center detects unusual patterns, and IAM Recommender supports quarterly access reviews.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "id": "57",
@@ -738,7 +794,8 @@
     ],
     "correct": 0,
     "explanation": "Separate projects provide complete isolation, custom IAM roles enable granular permissions, and Organization Policies prevent accidental production changes.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "id": "58",
@@ -751,7 +808,8 @@
     ],
     "correct": 1,
     "explanation": "Lifecycle policies automatically transition data between storage classes based on access patterns, optimizing costs without manual intervention.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Cloud Storage"
   },
   {
     "id": "59",
@@ -764,7 +822,8 @@
     ],
     "correct": 1,
     "explanation": "Separate projects with only required APIs enabled follows least privilege principle and minimizes attack surface per service.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "id": "60",
@@ -777,7 +836,8 @@
     ],
     "correct": 0,
     "explanation": "Billing export enables analysis, budget alerts provide notifications, and Cloud Functions can automate workload management based on spend thresholds.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Databases & Analytics"
   },
   {
     "id": "61",
@@ -790,7 +850,8 @@
     ],
     "correct": 0,
     "explanation": "Spot VMs provide cost savings, managed instance groups enable rapid scaling, and stateless game servers can tolerate Spot VM interruptions.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Compute Engine & Serverless"
   },
   {
     "id": "62",
@@ -803,7 +864,8 @@
     ],
     "correct": 3,
     "explanation": "Sole-tenant nodes eliminate noisy neighbor issues, custom machine types provide required specs, and dedicated interconnect ensures consistent ultra-low latency.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "63",
@@ -816,7 +878,8 @@
     ],
     "correct": 2,
     "explanation": "Firestore handles real-time inventory updates, lifecycle policies optimize order storage costs, and Coldline provides cost-effective catalog storage.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "64",
@@ -829,7 +892,8 @@
     ],
     "correct": 1,
     "explanation": "Firestore multi-region provides global profile access with eventual consistency, Spanner ensures strong consistency for messages, Cloud Storage with CDN optimizes media delivery.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Cloud Storage"
   },
   {
     "id": "65",
@@ -842,7 +906,8 @@
     ],
     "correct": 0,
     "explanation": "Pub/Sub handles high-volume ingestion, Dataflow processes streaming data, BigQuery enables analytics, and Bigtable provides fast time-series lookups.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Databases & Analytics"
   },
   {
     "id": "66",
@@ -855,7 +920,8 @@
     ],
     "correct": 0,
     "explanation": "Global load balancer distributes traffic efficiently, Cloud Storage provides scalable origin, and CDN with cache control optimizes global content delivery and costs.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "id": "67",
@@ -868,7 +934,8 @@
     ],
     "correct": 1,
     "explanation": "Regional VPCs ensure data residency compliance, while VPC peering enables shared services like monitoring and logging across regions.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "id": "68",
@@ -881,7 +948,8 @@
     ],
     "correct": 2,
     "explanation": "GKE integrates with Google Cloud IAM for authentication, Kubernetes RBAC for authorization based on roles/groups, and Cloud Audit Logs for auditing cluster admin actions, providing secure and auditable access.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "GKE / Containers"
   },
   {
     "id": "69",
@@ -894,7 +962,8 @@
     ],
     "correct": 1,
     "explanation": "GKE Workload Identity allows pods to use Google Cloud service accounts without static keys, enforcing least privilege and enhancing security by binding Kubernetes service accounts to Google Cloud service accounts.",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "GKE / Containers"
   },
   {
     "id": "70",
@@ -907,7 +976,8 @@
     ],
     "correct": 1,
     "explanation": "Anthos Config Management enables centralized, declarative policy management across multiple GKE clusters, ensuring consistent and compliant network policies.",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "question": "You need to connect two Google Cloud Virtual Private Cloud (VPC) networks in different projects so that virtual machine (VM) instances can communicate using their internal IP addresses. The networks should remain under the administrative control of their respective project owners. What should you do?",
@@ -920,7 +990,8 @@
     "correct": 1,
     "explanation": "VPC Network Peering allows you to connect VPC networks so that workloads in different VPC networks can communicate internally. It is ideal when you want to connect networks while keeping their administration decentralized.",
     "id": "71",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Networking"
   },
   {
     "question": "Your team needs to run a batch processing job that takes about 4 hours to complete. The job can be interrupted and resumed without data loss. You want to minimize costs. Which Compute Engine option should you choose?",
@@ -933,7 +1004,8 @@
     "correct": 1,
     "explanation": "Spot VMs (formerly Preemptible VMs) are highly affordable compute instances suitable for batch jobs and fault-tolerant workloads. They can be preempted at any time if Compute Engine requires access to those resources for other tasks.",
     "id": "72",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "question": "You are designing a database architecture for a global multiplayer game. The database must provide strong consistency, horizontal scalability, and multi-region replication. Which Google Cloud database service is the best fit?",
@@ -946,7 +1018,8 @@
     "correct": 2,
     "explanation": "Cloud Spanner is a fully managed relational database with unlimited scale, strong consistency, and up to 99.999% availability. It is designed specifically for global, horizontally scalable applications.",
     "id": "73",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Databases & Analytics"
   },
   {
     "question": "You want to ensure that all logs generated by your Google Cloud project are archived for compliance purposes for at least 3 years. The logs will be rarely accessed after the first 30 days. How should you configure this?",
@@ -959,7 +1032,8 @@
     "correct": 0,
     "explanation": "Cloud Storage is the most cost-effective destination for long-term log retention. Creating a sink to a Cloud Storage bucket and using Object Lifecycle Management to transition older logs to colder storage classes (like Archive) minimizes costs.",
     "id": "74",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "question": "A developer needs permission to deploy App Engine applications, but you want to follow the principle of least privilege. They do not need to manage IAM policies or delete the project. Which IAM role should you grant?",
@@ -972,7 +1046,8 @@
     "correct": 2,
     "explanation": "roles/appengine.deployer provides the specific permissions required to deploy App Engine apps, adhering to the principle of least privilege, unlike broader roles such as editor or appAdmin.",
     "id": "75",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Identity & IAM"
   },
   {
     "question": "You are migrating a monolithic application to Google Kubernetes Engine (GKE). You want to ensure that if a node crashes, the pods running on it are automatically rescheduled onto other available nodes. What Kubernetes resource manages this?",
@@ -985,7 +1060,8 @@
     "correct": 0,
     "explanation": "A Deployment provides declarative updates for Pods and ReplicaSets. It ensures that the specified number of pod replicas are running at any given time. If a node fails, the Deployment controller will schedule the lost pods on other healthy nodes.",
     "id": "76",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "question": "You need to route incoming HTTPS traffic to multiple backend services based on the URL path (e.g., /video routes to one backend, /images to another). Which load balancer should you use?",
@@ -998,7 +1074,8 @@
     "correct": 0,
     "explanation": "The Global external HTTP(S) Load Balancer supports URL maps, which allow you to route traffic to different backend services based on the HTTP request path or host.",
     "id": "77",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Networking"
   },
   {
     "question": "Your company uses a single billing account for multiple Google Cloud projects. You want to be notified by email if the total monthly spend exceeds $1,000. What should you do?",
@@ -1011,7 +1088,8 @@
     "correct": 0,
     "explanation": "Cloud Billing allows you to create budgets and set up threshold alerts. When costs exceed a specified percentage of the budget, it triggers an email notification to the billing administrators.",
     "id": "78",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Management & Operations"
   },
   {
     "question": "You want to securely access internal web applications hosted on Compute Engine from the internet without using a VPN. You want to verify both user identity and device context before granting access. Which Google Cloud service should you use?",
@@ -1024,7 +1102,8 @@
     "correct": 0,
     "explanation": "Identity-Aware Proxy (IAP) lets you manage access to applications running in Google Cloud based on user identity and context, eliminating the need for a VPN.",
     "id": "79",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Identity & IAM"
   },
   {
     "question": "You are configuring a firewall rule to block incoming traffic on port 22 (SSH) from all external IPs. What is the correct priority and source IP range for this rule?",
@@ -1037,7 +1116,8 @@
     "correct": 0,
     "explanation": "Priority 1000 is a high priority (lower number = higher priority), and 0.0.0.0/0 represents all IPv4 addresses. The default implicit deny rule has a priority of 65535, so an explicit rule must have a lower priority number to take effect.",
     "id": "80",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Networking"
   },
   {
     "question": "You are writing a Cloud Function that needs to trigger every time a new image is uploaded to a specific Cloud Storage bucket. Which trigger type should you select?",
@@ -1050,7 +1130,8 @@
     "correct": 2,
     "explanation": "Cloud Storage triggers allow a Cloud Function to execute in response to events within a bucket, such as object creation, deletion, or modification (e.g., google.storage.object.finalize).",
     "id": "81",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "question": "You want to test a new version of your App Engine application by sending 10% of the traffic to the new version and 90% to the old version. What feature should you use?",
@@ -1063,7 +1144,8 @@
     "correct": 0,
     "explanation": "App Engine allows you to seamlessly split traffic between two or more versions of an application. This is ideal for A/B testing and rolling out features gradually.",
     "id": "82",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "question": "Your team is using Terraform to manage Google Cloud infrastructure. Where should you securely store the Terraform state file so that multiple team members can collaborate without conflicts?",
@@ -1076,7 +1158,8 @@
     "correct": 1,
     "explanation": "A Cloud Storage bucket is the standard and recommended backend for storing Terraform state files in Google Cloud. Enabling versioning provides backup and recovery if the state file is corrupted.",
     "id": "83",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Cloud Storage"
   },
   {
     "question": "You need a fully managed, serverless, NoSQL document database for your mobile app. It needs to support real-time synchronization and offline data access. Which service should you choose?",
@@ -1089,7 +1172,8 @@
     "correct": 2,
     "explanation": "Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development. It natively supports real-time synchronization and offline capabilities for mobile and web clients.",
     "id": "84",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Databases & Analytics"
   },
   {
     "question": "You want to give a third-party vendor temporary, limited access to an object in your Cloud Storage bucket without requiring them to have a Google account. What is the most secure method?",
@@ -1102,7 +1186,8 @@
     "correct": 1,
     "explanation": "Signed URLs give time-limited read or write access to a specific Cloud Storage resource. Anyone with the URL can access the resource for the specified duration, regardless of whether they have a Google account.",
     "id": "85",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Cloud Storage"
   },
   {
     "question": "Which of the following Google Cloud services provides distributed messaging to decouple applications and microservices?",
@@ -1115,7 +1200,8 @@
     "correct": 0,
     "explanation": "Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications, decoupling systems.",
     "id": "86",
-    "difficulty": "Easy"
+    "difficulty": "Easy",
+    "category": "General Cloud Concepts"
   },
   {
     "question": "You want to deploy a containerized web application that scales automatically from 0 to N based on HTTP traffic, and you don't want to manage any underlying infrastructure. Which service is best?",
@@ -1128,7 +1214,8 @@
     "correct": 2,
     "explanation": "Cloud Run is a fully managed compute platform that automatically scales stateless containers. It handles all infrastructure management and can scale down to zero when there is no traffic.",
     "id": "87",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "GKE / Containers"
   },
   {
     "question": "You accidentally deleted a critical Compute Engine VM instance. You have a snapshot of its persistent disk taken 1 hour ago. How can you restore the instance?",
@@ -1141,7 +1228,8 @@
     "correct": 1,
     "explanation": "Snapshots are backups of persistent disks. To restore, you must create a new persistent disk using the snapshot as the source, and then use that new disk to create or boot a new VM.",
     "id": "88",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Compute Engine & Serverless"
   },
   {
     "question": "Your organization uses a Custom Role for managing Compute Engine instances. A new feature requires members with this role to also be able to manage Cloud Storage buckets. How should you proceed?",
@@ -1154,7 +1242,8 @@
     "correct": 0,
     "explanation": "Custom Roles in IAM can be updated at any time to add or remove specific permissions. This allows you to precisely control access as organizational needs change.",
     "id": "89",
-    "difficulty": "Medium"
+    "difficulty": "Medium",
+    "category": "Identity & IAM"
   },
   {
     "question": "You are migrating 50 TB of data from an on-premises data center to Cloud Storage. Your internet connection bandwidth is 100 Mbps. Which migration tool or service should you use to minimize transfer time?",
@@ -1167,7 +1256,8 @@
     "correct": 2,
     "explanation": "Transfer Appliance is a hardware appliance you lease from Google. It's used to securely migrate large volumes of data (typically hundreds of terabytes or more) when bandwidth is limited and a network transfer would take too long. Transferring 50 TB over a 100 Mbps link would take months.",
     "id": "90",
-    "difficulty": "Hard"
+    "difficulty": "Hard",
+    "category": "Cloud Storage"
   },
   {
     "question": "You are configuring a new development environment on your local machine using the Google Cloud CLI. You need to switch your active default configuration to target the 'proj-dev-123' project and the 'us-central1-a' compute zone. Which commands should you run?",
@@ -1180,7 +1270,8 @@
     "correct": 0,
     "explanation": "The 'gcloud config set project <PROJECT_ID>' and 'gcloud config set compute/zone <ZONE>' commands configure the local default properties for the active gcloud CLI profile.",
     "difficulty": "Easy",
-    "id": "91"
+    "id": "91",
+    "category": "Compute Engine & Serverless"
   },
   {
     "question": "Your company is migrating container images from legacy Container Registry (gcr.io) to Artifact Registry. You need to create a new Docker repository in the 'us-central1' region named 'my-apps' using the gcloud CLI. Which command should you execute?",
@@ -1193,7 +1284,8 @@
     "correct": 0,
     "explanation": "Artifact Registry repositories are created using 'gcloud artifacts repositories create [NAME] --repository-format=docker --location=[LOCATION]'.",
     "difficulty": "Medium",
-    "id": "92"
+    "id": "92",
+    "category": "GKE / Containers"
   },
   {
     "question": "You have several Compute Engine Virtual Machines running in a custom VPC subnet without public IP addresses. These instances need to download software package updates from public repositories on the internet, but must NOT receive any inbound connections from internet hosts. What Google Cloud component should you deploy?",
@@ -1206,7 +1298,8 @@
     "correct": 0,
     "explanation": "Cloud NAT (Network Address Translation) paired with Cloud Router enables instances without external IP addresses to send outbound requests to the internet and receive responses, while preventing external hosts from initiating direct inbound connections.",
     "difficulty": "Medium",
-    "id": "93"
+    "id": "93",
+    "category": "Networking"
   },
   {
     "question": "Your team wants to run containerized workloads on Kubernetes without managing underlying worker node infrastructure, nodepools, or cluster scaling operations. You want Google to fully manage node provisioning, security hardening, and resource allocation per pod. Which GKE operating mode should you select?",
@@ -1219,7 +1312,8 @@
     "correct": 0,
     "explanation": "GKE Autopilot is a fully managed hands-off Kubernetes mode where Google manages cluster infrastructure, node provisioning, and security, and you pay only for the resource requests of your pods.",
     "difficulty": "Easy",
-    "id": "94"
+    "id": "94",
+    "category": "GKE / Containers"
   },
   {
     "question": "You need to track infrastructure spending across different departments (Finance, Marketing, Engineering) in your company. All departments deploy resources into shared Google Cloud projects. What is the Google Cloud recommended best practice to attribute costs per department in detailed billing exports?",
@@ -1232,7 +1326,8 @@
     "correct": 0,
     "explanation": "Key-value resource labels allow you to annotate GCP resources (such as VM instances, disks, buckets). When Cloud Billing export to BigQuery is enabled, labels are included in the dataset for precise cost allocation.",
     "difficulty": "Medium",
-    "id": "95"
+    "id": "95",
+    "category": "Cloud Storage"
   },
   {
     "question": "A Compute Engine instance needs to read objects from a Cloud Storage bucket in the same project. To follow security best practices and the principle of least privilege, how should you grant access to the VM?",
@@ -1245,7 +1340,8 @@
     "correct": 0,
     "explanation": "Best practice is to assign a dedicated user-managed service account with minimal necessary permissions (e.g., Storage Object Viewer) to the instance. Storing service account key files on disk or using default project-wide editor accounts is insecure.",
     "difficulty": "Medium",
-    "id": "96"
+    "id": "96",
+    "category": "Identity & IAM"
   },
   {
     "question": "You need to grant a new contractor permission to view all resources in a Google Cloud project named 'prod-app-456' using the command line interface. Which gcloud command should you run?",
@@ -1258,7 +1354,8 @@
     "correct": 0,
     "explanation": "'gcloud projects add-iam-policy-binding' is the standard CLI command to add IAM bindings (member + role) to a project.",
     "difficulty": "Medium",
-    "id": "97"
+    "id": "97",
+    "category": "Identity & IAM"
   },
   {
     "question": "Your GitHub Actions CI/CD pipeline needs to deploy container updates to Cloud Run in Google Cloud. You want to authenticate GitHub Actions without storing long-lived service account key JSON files in your repository secrets. What service should you configure?",
@@ -1271,7 +1368,8 @@
     "correct": 0,
     "explanation": "Workload Identity Federation lets external workloads (like GitHub Actions, AWS, or Azure) authenticate to Google Cloud APIs using short-lived tokens, eliminating the risk of long-lived service account keys.",
     "difficulty": "Hard",
-    "id": "98"
+    "id": "98",
+    "category": "GKE / Containers"
   },
   {
     "question": "You are deploying a Cloud SQL for PostgreSQL instance that will host mission-critical data. The database must automatically fail over to a secondary zone in the same region with minimal downtime if the primary zone experiences an outage. How should you configure the instance?",
@@ -1284,7 +1382,8 @@
     "correct": 0,
     "explanation": "Cloud SQL High Availability (HA) configuration provisions a primary instance and a standby instance in two different zones within the same region. Data is synchronously replicated to standby, providing automatic failover.",
     "difficulty": "Medium",
-    "id": "99"
+    "id": "99",
+    "category": "Databases & Analytics"
   },
   {
     "question": "You have virtual machines running in a subnet with NO external IP addresses. You need these VMs to access Google Cloud APIs (such as Cloud Storage and BigQuery) internally without traversing the public internet. What setting must be enabled on the subnet?",
@@ -1297,6 +1396,7 @@
     "correct": 0,
     "explanation": "Private Google Access allows VM instances on a subnet that have only internal IP addresses to reach the external IP addresses of Google APIs and services.",
     "difficulty": "Easy",
-    "id": "100"
+    "id": "100",
+    "category": "Cloud Storage"
   }
 ]

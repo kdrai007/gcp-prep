@@ -16,6 +16,28 @@ export function escapeHtml(str) {
 }
 
 /**
+ * Escape regex special characters
+ */
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Highlight search query matches in text
+ */
+export function highlightText(text, searchQuery) {
+  if (!text) return '';
+  const escapedText = escapeHtml(text);
+  if (!searchQuery || searchQuery.trim() === '') return escapedText;
+
+  const terms = searchQuery.trim().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return escapedText;
+
+  const pattern = new RegExp(`(${terms.map(escapeRegex).join('|')})`, 'gi');
+  return escapedText.replace(pattern, '<mark class="search-highlight">$1</mark>');
+}
+
+/**
  * Format markdown backticks `code` or CLI commands into styled inline code elements
  */
 export function formatCode(text) {
