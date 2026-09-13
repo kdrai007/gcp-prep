@@ -38,16 +38,21 @@ async function initializeApp() {
     
     // Tag dynamically based on questions keywords
     state.questions = data.map(q => {
-      let category = 'General';
-      const text = (q.question + ' ' + q.explanation).toLowerCase();
-      if (text.includes('gke') || text.includes('kubernetes')) category = 'GKE / Containers';
-      else if (text.includes('iam') || text.includes('role') || text.includes('permission')) category = 'Identity & IAM';
-      else if (text.includes('storage') || text.includes('bucket')) category = 'Cloud Storage';
-      else if (text.includes('sql') || text.includes('spanner') || text.includes('firestore') || text.includes('bigtable')) category = 'Databases';
-      else if (text.includes('subnet') || text.includes('vpc') || text.includes('dns') || text.includes('load balancing')) category = 'Networking';
-      else if (text.includes('compute') || text.includes('instance') || text.includes('vm')) category = 'Compute Engine';
+      let category = q.category || 'General';
+      if (!q.category) {
+        const text = (q.question + ' ' + q.explanation).toLowerCase();
+        if (text.includes('gke') || text.includes('kubernetes') || text.includes('autopilot')) category = 'GKE / Containers';
+        else if (text.includes('iam') || text.includes('role') || text.includes('permission') || text.includes('service account')) category = 'Identity & IAM';
+        else if (text.includes('storage') || text.includes('bucket') || text.includes('artifact registry')) category = 'Cloud Storage';
+        else if (text.includes('sql') || text.includes('spanner') || text.includes('firestore') || text.includes('bigtable') || text.includes('bigquery')) category = 'Databases';
+        else if (text.includes('subnet') || text.includes('vpc') || text.includes('dns') || text.includes('load balancing') || text.includes('nat')) category = 'Networking';
+        else if (text.includes('compute') || text.includes('instance') || text.includes('vm') || text.includes('cloud run') || text.includes('app engine')) category = 'Compute Engine';
+        else if (text.includes('logging') || text.includes('monitoring') || text.includes('billing')) category = 'Management & Ops';
+      }
       
-      return { ...q, category };
+      const difficulty = q.difficulty || 'Medium';
+
+      return { ...q, category, difficulty };
     });
     
     // Load local storage states
@@ -67,10 +72,21 @@ async function initializeApp() {
 
 // Dark Mode Toggle logic
 const themeBtn = document.getElementById('theme-toggle');
-themeBtn.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const targetTheme = currentTheme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', targetTheme);
-});
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const targetTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', targetTheme);
+  });
+}
+
+// Register PWA Service Worker if supported
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => {
+      console.debug('Service Worker registration skipped:', err);
+    });
+  });
+}
 
 window.addEventListener('DOMContentLoaded', initializeApp);

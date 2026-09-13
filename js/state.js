@@ -8,12 +8,20 @@ export const state = {
   practiceProgress: {}, // { questionId: { attempted: true, correct: true } }
   history: [], // { id, score, date, elapsed, total }
   
+  // Filters
+  categoryFilter: 'all',
+  difficultyFilter: 'all',
+  searchQuery: '',
+  
   examSession: {
     questions: [],
     answers: {}, // { index: optionIndex }
     timeRemaining: 0,
-    timerId: null
-  }
+    totalTime: 0,
+    timerId: null,
+    examTitle: 'GCP Practice Exam'
+  },
+  latestReviewData: null
 };
 
 export function setView(viewName) {
@@ -30,6 +38,35 @@ export function resetExam() {
     questions: [],
     answers: {},
     timeRemaining: 0,
-    timerId: null
+    totalTime: 0,
+    timerId: null,
+    examTitle: 'GCP Practice Exam'
   };
+}
+
+/**
+ * Filter questions based on state.searchQuery, state.categoryFilter, and state.difficultyFilter
+ */
+export function applyFilters() {
+  let filtered = [...state.questions];
+
+  if (state.categoryFilter && state.categoryFilter !== 'all') {
+    filtered = filtered.filter(q => q.category === state.categoryFilter);
+  }
+
+  if (state.difficultyFilter && state.difficultyFilter !== 'all') {
+    filtered = filtered.filter(q => (q.difficulty || 'Medium') === state.difficultyFilter);
+  }
+
+  if (state.searchQuery && state.searchQuery.trim() !== '') {
+    const term = state.searchQuery.toLowerCase().trim();
+    filtered = filtered.filter(q => {
+      const qText = (q.question + ' ' + (q.explanation || '') + ' ' + (q.options || []).join(' ')).toLowerCase();
+      return qText.includes(term);
+    });
+  }
+
+  state.filteredQuestions = filtered;
+  state.currentQuestionIndex = 0;
+  return filtered;
 }

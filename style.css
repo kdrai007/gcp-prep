@@ -538,3 +538,213 @@ body {
   color: white;
 }
 
+/* Badges (Category & Difficulty) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.badge-category {
+  background: rgba(66, 133, 244, 0.12);
+  color: var(--color-gcp-blue);
+  border: 1px solid rgba(66, 133, 244, 0.25);
+}
+
+.badge-easy {
+  background: rgba(52, 168, 83, 0.15);
+  color: var(--color-gcp-green);
+  border: 1px solid rgba(52, 168, 83, 0.3);
+}
+
+.badge-medium {
+  background: rgba(251, 188, 5, 0.15);
+  color: #d97706;
+  border: 1px solid rgba(251, 188, 5, 0.3);
+}
+
+[data-theme="dark"] .badge-medium {
+  color: var(--color-gcp-yellow);
+}
+
+.badge-hard {
+  background: rgba(234, 67, 53, 0.15);
+  color: var(--color-gcp-red);
+  border: 1px solid rgba(234, 67, 53, 0.3);
+}
+
+/* Inline Code & Command Formatting */
+.inline-code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 0.88em;
+  background: rgba(148, 163, 184, 0.18);
+  color: var(--color-text-main);
+  padding: 0.15rem 0.4rem;
+  border-radius: 5px;
+  border: 1px solid var(--color-card-border);
+  word-break: break-word;
+}
+
+/* Difficulty Breakdown in Dashboard */
+.difficulty-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.diff-stat-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-card-border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.diff-stat-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.diff-stat-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.diff-stat-sub {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Custom Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: slideDown 0.25s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Keyboard Hints Bar */
+.keyboard-hint-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 0.6rem 1rem;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px dashed var(--color-card-border);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.kbd-key {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-card-border);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--color-text-main);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Data Management Actions */
+.data-management-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.data-actions-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-danger {
+  background: rgba(234, 67, 53, 0.15);
+  border: 1px solid var(--color-gcp-red);
+  color: var(--color-gcp-red);
+}
+
+.btn-danger:hover {
+  background: var(--color-gcp-red);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+
