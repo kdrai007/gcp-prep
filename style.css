@@ -16,7 +16,7 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
   --glass-blur: blur(12px);
-  --max-width: 900px;
+  --max-width: 1280px;
 }
 
 [data-theme="light"] {
@@ -836,6 +836,343 @@ body {
   border-radius: 3px;
   font-weight: 600;
 }
+
+/* =========================================================
+   STITCH COCKPIT DASHBOARD DESIGN SYSTEM
+   ========================================================= */
+
+/* Hero Bento Layout */
+.hero-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-bento-grid {
+    grid-template-columns: 5fr 7fr;
+  }
+}
+
+/* Readiness Score Radar Card */
+.readiness-card {
+  background: var(--color-card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-premium), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.readiness-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(66, 133, 244, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.readiness-gauge-layout {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.radial-gauge {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.radial-gauge svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: var(--color-bg-secondary);
+  stroke-width: 9;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gauge-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.gauge-score {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.gauge-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* 4 KPI Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.kpi-tile {
+  background: var(--color-card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-card-border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-premium), inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.kpi-sub {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+/* Progress bar inside KPI and Domain Cards */
+.metric-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--color-bg-secondary);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.metric-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+/* Modes Grid - 5 Cards */
+.modes-grid-5 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .modes-grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .modes-grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.mode-card-stitch {
+  background: var(--color-card-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-card-border);
+  border-radius: 14px;
+  padding: 1.35rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mode-card-stitch:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-gcp-blue);
+  box-shadow: 0 14px 28px -8px rgba(66, 133, 244, 0.25);
+}
+
+.mode-card-stitch h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mode-card-stitch p {
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Domain Competency Syllabus Grid */
+.domain-syllabus-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .domain-syllabus-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .domain-syllabus-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.domain-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 12px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+  transition: var(--transition-smooth);
+}
+
+.domain-card:hover {
+  border-color: var(--color-gcp-blue);
+}
+
+.domain-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.domain-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.3;
+}
+
+/* Status Filter Pills Row */
+.status-pills-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.status-pill-btn {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-card-border);
+  color: var(--color-text-muted);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-family: inherit;
+}
+
+.status-pill-btn:hover {
+  color: var(--color-text-main);
+  border-color: var(--color-gcp-blue);
+}
+
+.status-pill-btn.active {
+  background: rgba(66, 133, 244, 0.15);
+  border-color: var(--color-gcp-blue);
+  color: var(--color-gcp-blue);
+}
+
+/* Question Bank High-Fidelity Table */
+.qb-command-snippet {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
 
 
 

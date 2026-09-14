@@ -9,19 +9,35 @@
   <title>GCP Associate Cloud Engineer Practice Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app-layout">
-    <!-- Premium Header -->
+    <!-- Cockpit Header (Stitch Design) -->
     <header class="app-header">
-      <a href="#/dashboard" style="text-decoration: none; color: inherit;" class="logo-container">
-        <span class="logo-icon">☁️</span>
-        <h1>GCP ACE Practice Hub</h1>
-      </a>
-      <div class="header-actions">
-        <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme">🌓</button>
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <a href="#/dashboard" style="text-decoration: none; color: inherit;" class="logo-container">
+          <span class="logo-icon">☁️</span>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <h1 style="font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;">GCP ACE Cockpit</h1>
+              <span class="badge badge-category" style="font-size: 0.68rem; padding: 0.15rem 0.45rem;">2025 SYLLABUS</span>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted); font-family: 'JetBrains Mono', monospace; display: block; margin-top: -2px;">Associate Cloud Engineer Hub</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Header HUD Telemetry -->
+      <div class="header-actions" style="display: flex; align-items: center; gap: 0.75rem;">
+        <div class="header-telemetry-chip" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.65rem; background: var(--color-card-bg); border: 1px solid var(--color-card-border); border-radius: 8px; color: var(--color-gcp-yellow);">
+          <span>🔥</span> <span>7d Streak</span>
+        </div>
+        <div class="header-telemetry-chip hidden-sm" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.65rem; background: var(--color-card-bg); border: 1px solid var(--color-card-border); border-radius: 8px; color: var(--color-gcp-green);">
+          <span>🎯</span> <span>18d to Exam</span>
+        </div>
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">🌓</button>
       </div>
     </header>
 

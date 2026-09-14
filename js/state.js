@@ -11,6 +11,7 @@ export const state = {
   // Filters
   categoryFilter: 'all',
   difficultyFilter: 'all',
+  statusFilter: 'all', // 'all' | 'solved' | 'missed' | 'unattempted'
   searchQuery: '',
   
   examSession: {
@@ -48,7 +49,8 @@ export function hasActiveFilters() {
   return Boolean(
     (state.searchQuery && state.searchQuery.trim() !== '') ||
     (state.categoryFilter && state.categoryFilter !== 'all') ||
-    (state.difficultyFilter && state.difficultyFilter !== 'all')
+    (state.difficultyFilter && state.difficultyFilter !== 'all') ||
+    (state.statusFilter && state.statusFilter !== 'all')
   );
 }
 
@@ -56,11 +58,12 @@ export function resetFilters() {
   state.searchQuery = '';
   state.categoryFilter = 'all';
   state.difficultyFilter = 'all';
+  state.statusFilter = 'all';
   applyFilters();
 }
 
 /**
- * Filter questions based on state.searchQuery, state.categoryFilter, and state.difficultyFilter
+ * Filter questions based on state.searchQuery, categoryFilter, difficultyFilter, and statusFilter
  */
 export function applyFilters() {
   let filtered = [...state.questions];
@@ -75,7 +78,21 @@ export function applyFilters() {
     filtered = filtered.filter(q => (q.difficulty || 'Medium') === state.difficultyFilter);
   }
 
-  // 3. Search query (smart multi-term matching)
+  // 3. Filter by question status (All, Solved, Missed, Unattempted)
+  if (state.statusFilter && state.statusFilter !== 'all') {
+    if (state.statusFilter === 'solved') {
+      filtered = filtered.filter(q => state.practiceProgress[q.id]?.attempted);
+    } else if (state.statusFilter === 'missed') {
+      filtered = filtered.filter(q => {
+        const p = state.practiceProgress[q.id];
+        return p && p.attempted && !p.correct;
+      });
+    } else if (state.statusFilter === 'unattempted') {
+      filtered = filtered.filter(q => !state.practiceProgress[q.id]?.attempted);
+    }
+  }
+
+  // 4. Search query (smart multi-term matching)
   if (state.searchQuery && state.searchQuery.trim() !== '') {
     const rawQuery = state.searchQuery.toLowerCase().trim();
     const terms = rawQuery.split(/\s+/).filter(Boolean);
