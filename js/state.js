@@ -22,6 +22,9 @@ export const state = {
     timerId: null,
     examTitle: 'GCP Practice Exam'
   },
+  // Streak & Exam Target Date
+  streak: { count: 0, lastDate: null },
+  examDate: null, // 'YYYY-MM-DD'
   latestReviewData: null
 };
 

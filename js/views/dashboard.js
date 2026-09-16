@@ -1,6 +1,6 @@
 import { state, setView, applyFilters, resetFilters, hasActiveFilters, resetExam } from '../state.js';
 import { storage } from '../storage.js';
-import { renderBadges, highlightText, renderDifficultyBadge, renderCategoryBadge } from '../utils.js';
+import { renderBadges, highlightText, renderDifficultyBadge, renderCategoryBadge, formatExamCountdown, calculateCurrentStreak } from '../utils.js';
 
 // Domain specifications matching Google Cloud Associate Cloud Engineer Exam Blueprint
 const DOMAIN_SPECS = [
@@ -72,6 +72,12 @@ export function renderDashboard() {
     passProjection = 'Needs Core Review (<65%)';
     passColor = 'var(--color-gcp-red)';
   }
+
+  // Streak & Target Exam Date Telemetry
+  const streakData = state.streak || storage.loadStreak();
+  const currentStreak = calculateCurrentStreak(streakData);
+  const examDate = state.examDate || storage.loadExamDate();
+  const countdown = formatExamCountdown(examDate);
 
   // Difficulty specific stats
   const diffStats = {
@@ -169,6 +175,17 @@ export function renderDashboard() {
               <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.45;">
                 You've mastered <strong>${masteredDomainsCount} of 5</strong> exam domains. Target passing score on official exam is 70%.
               </p>
+
+              <!-- Target Exam & Streak Telemetry Pills -->
+              <div style="margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <button id="btn-hero-exam-date" class="btn-icon" style="background: rgba(15, 23, 42, 0.45); border: 1px dashed var(--color-card-border); border-radius: 8px; padding: 0.3rem 0.65rem; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; color: ${countdown.color};" title="Click to set or change target exam date">
+                  <span>🎯</span> <strong>${countdown.text}</strong>
+                  <span style="color: var(--color-text-muted); font-size: 0.7rem;">✏️</span>
+                </button>
+                <button id="btn-hero-streak" class="btn-icon" style="background: rgba(15, 23, 42, 0.45); border: 1px dashed var(--color-card-border); border-radius: 8px; padding: 0.3rem 0.65rem; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; color: var(--color-gcp-yellow);" title="Click to view daily study streak details">
+                  <span>🔥</span> <strong>${currentStreak}d Streak</strong>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -746,6 +763,14 @@ export function renderDashboard() {
     state.examSession.totalTime = 120 * 60;
     state.examSession.examTitle = 'Full 50-Question Practice Exam';
     setView('exam');
+  });
+
+  document.getElementById('btn-hero-exam-date')?.addEventListener('click', () => {
+    document.getElementById('header-exam-chip')?.click();
+  });
+
+  document.getElementById('btn-hero-streak')?.addEventListener('click', () => {
+    document.getElementById('header-streak-chip')?.click();
   });
 
   // Domain Syllabus Drill Buttons

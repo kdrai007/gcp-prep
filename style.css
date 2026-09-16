@@ -248,6 +248,14 @@ body {
   box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.15);
 }
 
+input[type="date"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] input[type="date"] {
+  color-scheme: light;
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -555,7 +563,9 @@ body {
   background: rgba(66, 133, 244, 0.12);
   color: var(--color-gcp-blue);
   border: 1px solid rgba(66, 133, 244, 0.25);
+  min-width: fit-content;
 }
+
 
 .badge-easy {
   background: rgba(52, 168, 83, 0.15);
@@ -777,7 +787,40 @@ body {
   max-height: 440px;
   overflow-y: auto;
   margin-top: 1rem;
-  padding-right: 0.25rem;
+  padding-right: 0.45rem;
+  scroll-behavior: smooth;
+  /* Firefox Scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(66, 133, 244, 0.5) rgba(15, 23, 42, 0.6);
+}
+
+/* Custom Cockpit Neon Scrollbar (Chrome, Safari, Edge) */
+.question-bank-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.question-bank-list::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  margin: 4px 0;
+}
+
+.question-bank-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4285f4 0%, #34a853 100%);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 10px rgba(66, 133, 244, 0.45);
+  transition: all 0.2s ease;
+}
+
+.question-bank-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5a95f5 0%, #46c768 100%);
+  box-shadow: 0 0 14px rgba(66, 133, 244, 0.75), inset 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.question-bank-list::-webkit-scrollbar-thumb:active {
+  background: #4285f4;
 }
 
 .question-bank-item {

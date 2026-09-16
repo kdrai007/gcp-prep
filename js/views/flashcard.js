@@ -1,5 +1,5 @@
 import { state, setView, hasActiveFilters, resetFilters } from '../state.js';
-import { formatCode, renderBadges } from '../utils.js';
+import { formatCode, renderBadges, recordStudyActivity } from '../utils.js';
 
 let flashcardKeyHandler = null;
 
@@ -98,6 +98,7 @@ export function renderFlashcard() {
     const card = document.getElementById('flashcard-card');
     card.addEventListener('click', () => {
       card.classList.toggle('flipped');
+      recordStudyActivity();
     });
 
     // Navigation Handlers
@@ -129,7 +130,10 @@ export function renderFlashcard() {
 
   function flipCard() {
     const card = document.getElementById('flashcard-card');
-    if (card) card.classList.toggle('flipped');
+    if (card) {
+      card.classList.toggle('flipped');
+      recordStudyActivity();
+    }
   }
 
   // Keyboard Shortcuts Handler

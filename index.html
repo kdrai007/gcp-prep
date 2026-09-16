@@ -29,14 +29,14 @@
         </a>
       </div>
 
-      <!-- Header HUD Telemetry -->
+      <!-- Header HUD Telemetry (Interactive) -->
       <div class="header-actions" style="display: flex; align-items: center; gap: 0.75rem;">
-        <div class="header-telemetry-chip" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.65rem; background: var(--color-card-bg); border: 1px solid var(--color-card-border); border-radius: 8px; color: var(--color-gcp-yellow);">
-          <span>🔥</span> <span>7d Streak</span>
-        </div>
-        <div class="header-telemetry-chip hidden-sm" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.65rem; background: var(--color-card-bg); border: 1px solid var(--color-card-border); border-radius: 8px; color: var(--color-gcp-green);">
-          <span>🎯</span> <span>18d to Exam</span>
-        </div>
+        <button id="header-streak-chip" class="header-telemetry-chip btn-icon" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.75rem; background: var(--color-card-bg); border: 1px solid var(--color-card-border); border-radius: 8px; color: var(--color-gcp-yellow); cursor: pointer;" title="View Study Streak details">
+          <span>🔥</span> <span id="header-streak-val">0d Streak</span>
+        </button>
+        <button id="header-exam-chip" class="header-telemetry-chip hidden-sm btn-icon" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.75rem; background: var(--color-card-bg); border: 1px solid var(--color-card-border); border-radius: 8px; color: var(--color-gcp-green); cursor: pointer;" title="Click to set Target Exam Date">
+          <span>🎯</span> <span id="header-exam-val">Set Exam Date</span>
+        </button>
         <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">🌓</button>
       </div>
     </header>
@@ -45,6 +45,79 @@
     <main class="app-main" id="app-view">
       <div class="loading-spinner">Loading GCP practice hub...</div>
     </main>
+
+    <!-- Target Exam Date Modal Backdrop -->
+    <div id="exam-date-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>🎯 Target Exam Date</h3>
+          <button class="btn-icon" id="exam-date-modal-close" aria-label="Close Modal">✕</button>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-top: -0.5rem;">
+          Set your scheduled or planned GCP Associate Cloud Engineer exam date to track your real-time preparation countdown.
+        </p>
+        
+        <div class="form-group">
+          <label class="form-label" for="target-exam-date-input">Select Exam Date</label>
+          <input type="date" id="target-exam-date-input" class="input-text">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Quick Presets</label>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm preset-date-btn" data-days="14">+2 Weeks</button>
+            <button class="btn btn-secondary btn-sm preset-date-btn" data-days="30">+30 Days</button>
+            <button class="btn btn-secondary btn-sm preset-date-btn" data-days="60">+60 Days</button>
+            <button class="btn btn-secondary btn-sm preset-date-btn" data-days="90">+90 Days</button>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+          <button class="btn btn-danger btn-sm" id="btn-clear-exam-date">Clear Date</button>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary" id="btn-cancel-exam-date">Cancel</button>
+            <button class="btn btn-primary" id="btn-save-exam-date">Save Date 🎯</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streak Info Modal Backdrop -->
+    <div id="streak-info-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card" style="max-width: 440px;">
+        <div class="modal-header">
+          <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+            <span>🔥 Daily Study Streak</span>
+          </h3>
+          <button class="btn-icon" id="streak-modal-close" aria-label="Close Modal">✕</button>
+        </div>
+
+        <div style="text-align: center; padding: 1.5rem 0; background: var(--color-card-bg); border-radius: 12px; border: 1px solid var(--color-card-border); margin: 0.5rem 0;">
+          <div style="font-size: 3.5rem; font-weight: 800; color: var(--color-gcp-yellow); line-height: 1;" id="modal-streak-count">
+            0
+          </div>
+          <div style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-top: 0.35rem;">
+            Consecutive Days
+          </div>
+          <div id="modal-streak-status" style="margin-top: 0.75rem; font-size: 0.88rem; color: var(--color-gcp-green);">
+            ● Active Today
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.5;">
+          <p>
+            🧠 <strong>Why consistency matters:</strong> Spaced repetition builds strong synaptic recall for GCP service architectures, IAM roles, and CLI syntax.
+          </p>
+          <p>
+            Answering questions in <strong>Practice Mode</strong>, completing an <strong>Exam Simulation</strong>, or flipping <strong>Flashcards</strong> counts toward maintaining your daily streak!
+          </p>
+        </div>
+
+        <div class="modal-footer" style="margin-top: 0.5rem;">
+          <button class="btn btn-primary" id="btn-close-streak-modal" style="width: 100%;">Keep Studying 🚀</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Entry Script as Module -->

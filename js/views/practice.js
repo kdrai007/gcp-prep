@@ -1,6 +1,6 @@
 import { state, setView, hasActiveFilters, resetFilters } from '../state.js';
 import { storage } from '../storage.js';
-import { formatCode, renderBadges } from '../utils.js';
+import { formatCode, renderBadges, recordStudyActivity } from '../utils.js';
 
 let practiceKeyHandler = null;
 
@@ -140,6 +140,7 @@ export function renderPractice() {
       correctAnswerIndex: q.correct 
     };
     storage.savePractice(state.practiceProgress);
+    recordStudyActivity();
     
     revealAnswer(q.correct, selectedIdx);
   }

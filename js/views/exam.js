@@ -1,6 +1,6 @@
 import { state, setView, resetExam } from '../state.js';
 import { storage } from '../storage.js';
-import { formatCode, renderBadges } from '../utils.js';
+import { formatCode, renderBadges, recordStudyActivity } from '../utils.js';
 
 let examKeyHandler = null;
 
@@ -187,6 +187,7 @@ export function renderExam() {
     };
     state.history.unshift(historyItem);
     storage.saveHistory(state.history);
+    recordStudyActivity();
     
     // Save review data to app-state so Review Page can fetch it
     state.latestReviewData = {

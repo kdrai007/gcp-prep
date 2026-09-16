@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gcp-ace-prep-v2';
+const CACHE_NAME = 'gcp-ace-prep-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
