@@ -1,8 +1,13 @@
-const CACHE_NAME = 'gcp-ace-prep-v4';
+const CACHE_NAME = 'gcp-ace-prep-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
+  './favicon.svg',
+  './favicon.ico',
+  './apple-touch-icon.png',
+  './icon-192.png',
+  './icon-512.png',
   './data.json',
   './manifest.json',
   './js/app.js',
